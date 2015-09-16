@@ -15,6 +15,17 @@ class TodosController < ApplicationController
   end
 
   def create
+    #For create to work, we must *require* that a parameter is sent with the name 'task'
+    if params[:task].nil? || params[:task].empty?
+      err_msg = "The 'task' parameter was empty or not found"
+      render json: { error_msg: err_msg }.to_json, status: 422
+    else
+      # todo = todo.create(task: params[:task])
+      todo = Todo.new
+      todo.task = params[:task]
+      todo.save
+      render json: todo.to_json, status: 201
+    end
   end
 
   def update
