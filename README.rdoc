@@ -1,27 +1,44 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
+* Ruby version 2.2
 
 * Database creation
 
-* Database initialization
+  Created a table 'todos' in db using ActiveRecord migration. 'todos' table holds a task: string and complete: boolean.           Populated table by creating new entries in seeds.rb and running rake db:seed.
 
 * How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+Using rails server you can enter the following url's into a browser:
 
-* Deployment instructions
+http://localhost:3000/todos
 
-* ...
+Returns all entries in the todos table
+
+http://localhost:3000/todos/new
+
+Returns an empty (new) todo
+
+http://localhost:3000/todos/1
+
+Returns the entry with id: 1 from todos table
+
+http://localhost:3000/todos/8989898
+
+Returns an error message: Record not found
+
+Using the Postman app:
+
+POST http://localhost:3000/todos/1 with parameters { "body": "Finish Homework" }
+
+Returns a new entry in json and creates a new entry in todos.
+
+DELETE http://localhost:3000/todos/1 
+
+Deletes the entry with id: 1 form todos and returns a message: deleted
+
+PUT http://localhost:3000/todos/1 { completed: true }
+
+updates complete for the entry with id: 1 in todos. complete changes from false to true. displays the entry as json
 
 
 Please feel free to use a different markup language if you do not plan to run
