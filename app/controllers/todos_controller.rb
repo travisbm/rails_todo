@@ -35,6 +35,13 @@ class TodosController < ApplicationController
   end
 
   def destroy
+    if Todo.exists?(params[:id])
+      todo = Todo.find(params[:id])
+      todo.destroy
+      render json: { message: "todo Deleted Successfully." }, status: 200
+    else
+      render json: { error_msg: 'Record Not Found!', id: params[:id] }.to_json, status: 404
+    end
   end
 
 end
