@@ -6,7 +6,10 @@ class TodosController < ApplicationController
   end
 
   def show
-    if Todo.exists?(params[:id])
+    if params[:id] == "new"
+      todo = Todo.new
+      render json: todo.to_json, status: 200
+    elsif Todo.exists?(params[:id])
       todo = Todo.find(params[:id])
       render json: todo.to_json, status: 200
     else
